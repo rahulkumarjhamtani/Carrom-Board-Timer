@@ -1,6 +1,7 @@
 <!-- Carrom Board Timer -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" href="./carrom.png">
 </head>
+
 <body>
 
     <div class="container">
@@ -28,7 +30,7 @@
             <button id="startButton" onclick="startButton()">Start Game</button>
             <button id="breakButton" onclick="breakButton()">Break</button>
         </div>
-        
+
         <div class="player1 newPlay">
             <label for="player1">Player 1</label>
             <input type="number" name="player1" class="playTime" id="play1" value="00.00" readonly>
@@ -36,14 +38,14 @@
         </div>
 
         <div class="setPlayers">
-            
+
 
             <div class="player2 newPlay">
                 <label for="player2">Player 2</label>
                 <input type="number" name="player2" class="playTime" id="play2" value="00.00" readonly>
                 <button class="stopButton" onclick="stopValue()">Stop</button>
             </div>
-            
+
             <div class="setImg">
                 <img src="./carrom.png" alt="Carrom Board" id="setImage">
             </div>
@@ -51,236 +53,25 @@
             <div class="player3 newPlay">
                 <label for="player3">Player 3</label>
                 <input type="number" name="player3" class="playTime" id="play3" value="00.00" readonly>
-                <button class="stopButton"  onclick="stopValue()">Stop</button>
+                <button class="stopButton" onclick="stopValue()">Stop</button>
             </div>
         </div>
 
         <div class="player4 newPlay">
             <label for="player4">Player 4</label>
             <input type="number" name="player4" class="playTime" id="play4" value="00.00" readonly>
-            <button class="stopButton"  onclick="stopValue()">Stop</button>
+            <button class="stopButton" onclick="stopValue()">Stop</button>
         </div>
 
     </div>
 
 
-    
+
 </body>
 <!-- <script src="./script.js"></script> -->
 
-<script>
-    var x, y, z;
+<script src="./script.js">
 
-    var k = 0;
-
-    var isBreak = false;
-
-    var temp = [];
-
-    var tempBreak = [];
-
-    function setTimer(setTime,getTime)
-    {
-        getTime.value = setTime;
-        console.log(setTime);
-        tempBreak.push(setTime);
-    }
-
-    function stopValue()
-    {
-        tempBreak = [];
-        setTimer(document.getElementById('play1').value, document.getElementById('play1'));
-        setTimer(document.getElementById('play2').value, document.getElementById('play2'));
-        setTimer(document.getElementById('play3').value, document.getElementById('play3'));
-        setTimer(document.getElementById('play4').value, document.getElementById('play4'));
-        console.log("Stop = ",tempBreak);
-
-        var playerList = document.getElementsByClassName('playTime');
-
-        
-        var distance = [];
-        for(var i=0;i<k;i++)
-        {
-            distance[i] = tempBreak[i];
-        }
-        var players = k;
-        var i = 0;
-        if(z == undefined)
-        {
-            console.log('Bye');
-            clearInterval(z);
-        }
-        z = setInterval(function() {
-            if (i>=players)
-            {
-                clearInterval(z);
-            }
-                distance[i] = distance[i]
-                distance[i+1] = distance[i+1] - 1;
-                playerList[i+1].value = distance[i+1];
-                console.log(distance[i+1]);
-                  
-                if (playerList[i+1].value <= 0) {
-                    playerList[i+1].value = 0;
-                    i++;
-                    distance[i+1] = tempBreak[i+1];
-                }
-            
-          }, 1000);
-
-    }
-
-    function addPlayer()
-    {
-        if(k>3)
-        {
-            alert('Players cannot be greater than 4');
-            return;
-        }
-        var playerList = document.getElementsByClassName('newPlay');
-
-        playerList[k].style.display = 'inline-block';
-
-        console.log('k = ',k);
-
-        k++;
-
-        
-    }
-    
-    function startButton()
-    {
-
-        var players = k;
-        console.log('k = ',k);
-        if(k<=1)
-        {
-            alert('Players cannot be less than 2');
-            return;
-        }
-        if(document.getElementById('gameTime').value < 0 || document.getElementById('breakTime').value < 0)
-        {
-            alert('Values cannot be less than 0');
-            return;
-        }
-        if(document.getElementById('gameTime').value >= 0 && document.getElementById('gameTime').value < 1)
-        {
-            alert('Game Time cannot be less than 1');
-            return;
-        }
-        var gameTime = document.getElementById('gameTime').value;
-        var breakTime = document.getElementById('breakTime').value;
-        console.log("Game = ",gameTime);
-        console.log("Break = ",breakTime);
-        console.log("Players = ",players);
-
-        
-        var playerTime = [];
-
-        var playerList = document.getElementsByClassName('playTime');
-
-        console.log('Break = ',isBreak);
-        if(isBreak)
-        {
-
-            for(var i =0; i<k; i++)
-            {
-                temp[i] = tempBreak[i];
-                playerTime[i] = tempBreak[i];
-                console.log("Each Player Time = ",playerTime[i]);
-            } 
-
-            for(var i=0;i<playerList.length;i++)
-            {
-                playerList[i].value = temp[i];
-                playerTime[i] = temp[i];
-            }
-        }
-        else
-        {
-            
-            for(var i =0; i<k; i++)
-            {
-                playerTime[i] = ((gameTime - breakTime) / players) * 60;
-                temp[i] = playerTime[i];
-            } 
-            console.log("Each Player Time = ",playerTime);
-
-            for(var i=0;i<playerList.length;i++)
-            {
-                playerList[i].value = playerTime[i];
-            }
-            
-        }
-        isBreak = false;
-
-        var distance = [];
-
-        for(var i=0;i<k;i++)
-        {
-            distance[i] = playerTime[i];
-            console.log('Distance = ',distance[i]);
-        }
-
-        var i = 0;
-        x = setInterval(function() {
-            if (i>=players)
-            {
-                clearInterval(x);
-                alert('Game Over');
-            }
-
-                distance[i] = distance[i] - 1;
-                playerList[i].value = distance[i];
-                console.log(distance[i]);
-                  
-                if (playerList[i].value <= 0) {
-                    playerList[i].value = 0;
-                    i++;
-                    distance[i] = playerTime[i];
-                }
-            
-          }, 1000);
-    }
-
-    function breakButton()
-    {
-        if(document.getElementById('gameTime').value < 0 || document.getElementById('breakTime').value < 0)
-        {
-            alert('Values cannot be less than 0');
-            return;
-        }
-        clearInterval(x);
-        var breakTime = document.getElementById('breakTime').value;
-        document.getElementById('inSec').innerHTML = '(in seconds)';
-        var breakTimeVal = breakTime * 60;
-        document.getElementById('breakTime').value = breakTimeVal;
-        var distance = breakTimeVal;
-
-        var t = document.getElementsByClassName('playTime');
-        for(var i =0;i<t.length;i++)
-        {
-            temp[i] = t[i].value; 
-        }
-
-        y = setInterval(function() {
-
-            distance = distance - 1;
-            document.getElementById('breakTime').value = distance;
-            console.log(distance);
-              
-            if (document.getElementById('breakTime').value < 1) {
-                clearInterval(y);
-                isBreak = true;
-                setTimer(document.getElementById('play1').value, document.getElementById('play1'));
-                setTimer(document.getElementById('play2').value, document.getElementById('play2'));
-                setTimer(document.getElementById('play3').value, document.getElementById('play3'));
-                setTimer(document.getElementById('play4').value, document.getElementById('play4'));
-                startButton();
-            }
-            
-          }, 1000);
-    }
 </script>
 
 
