@@ -4,6 +4,8 @@ var k = 0;
 
 var isBreak = false;
 
+var inInterval = false;
+
 var temp = [];
 
 var tempBreak = [];
@@ -42,13 +44,15 @@ function stopValue() {
   }
   var players = k;
   var i = 0;
-  if (z == undefined) {
-    console.log("Bye");
-    clearInterval(z);
-  }
+  // if (z == undefined) {
+  //   console.log("Bye");
+  //   clearInterval(z);
+  // }
   z = setInterval(function () {
+    
     if (i >= players) {
       clearInterval(z);
+      isInterval = false;
     }
     distance[i] = distance[i];
     distance[i + 1] = distance[i + 1] - 1;
@@ -142,8 +146,10 @@ function startButton() {
 
   var i = 0;
   x = setInterval(function () {
+    isInterval = true;
     if (i >= players) {
       clearInterval(x);
+      isInterval = false;
       alert("Game Over");
     }
 
@@ -154,6 +160,7 @@ function startButton() {
     if (playerList[i].value <= 0) {
       playerList[i].value = 0;
       i++;
+      isInterval = false;
       distance[i] = playerTime[i];
     }
   }, 1000);
