@@ -1,0 +1,84 @@
+.addButton, .player1
+{
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+}
+
+.btn
+{
+    cursor:pointer;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+
+#leftMargin
+{
+    margin-left: 20px;
+}
+
+#startButton, #breakButton, .stopButton
+{
+    cursor:pointer;
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+#startButton
+{
+    color: rgb(124, 0, 0);
+    background-color: rgb(252, 169, 183);
+    margin-right: 12rem;
+}
+
+#breakButton
+{
+    color: rgb(150, 127, 0);
+    background-color: rgb(110, 255, 110);
+    /* margin-left: 3rem; */
+}
+
+#setImage
+{
+    width: 300px;
+    height: 300px;
+}
+
+.stopButton
+{
+    color: rgb(150, 0, 0);
+    background-color: rgb(14, 255, 14);
+}
+
+.setPlayers
+{
+    width:100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+    
+}
+
+.setImg, .player2, .player3
+{
+    width:30%;
+}
+
+.setImg
+{
+    margin: auto;
+    display: inline-block;
+}
+
+.player1, .player2, .player3, .player4
+{
+    display: none   ;
+}
+
+.player4
+{
+    width: 100%;
+    text-align: center;
+}
